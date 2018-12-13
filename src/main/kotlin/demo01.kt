@@ -1,17 +1,14 @@
 import kotlinx.coroutines.*
 
-fun main(args: Array<String>) {
-    runBlocking {
-        launch {
-            doWorld()
+fun main(args: Array<String>) = runBlocking{
+
+    GlobalScope.launch {
+        repeat(1000) {
+            println("I an sleeping $it")
+            delay(500L)
+
         }
-        println("Hello, ")
     }
-
-}
-
-suspend fun doWorld() {
-    delay(1000L)
-    println("world!")
+    delay(1300L)
 
 }
