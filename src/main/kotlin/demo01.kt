@@ -1,12 +1,13 @@
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 
 fun main(args: Array<String>) = runBlocking {
-    val result = withTimeoutOrNull(1300L) {
-        repeat(1000) {
-            println("I am sleeping $it")
-            delay(500L)
-        }
-        "Done"
+    val channel = Channel<Int>()
+
+    launch {
+        for (x in 1..5) channel.send(x * x)
     }
-    println("Result is $result")
+    repeat(5) { println(channel.receive()) }
+    println("Done!")
+
 }
